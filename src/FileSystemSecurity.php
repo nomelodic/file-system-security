@@ -42,13 +42,22 @@ class FileSystemSecurity
     function __construct(array $config)
     {
         if (!isset($config['baseDir'])) $this->error('Не указана корневая директория.');
+        if (isset($config['callback']) && !is_callable($config['callback'])) $this->error('В \'callback\' необходимо передавать функцию.');
+
+        foreach (['exclude', 'include', 'excludeMerge', 'includeMerge'] as $item) { if (isset($config[$item]) && !is_array($config[$item])) $this->error('В \'' . $item . '\' необходимо передавать массив.'); }
 
         $this->baseDir  = rtrim($config['baseDir'], '/') . '/';
         $this->callback = $config['callback'] ?? null;
 
         // TODO: Продумать более гибкий вариант масок
-        $this->exclude  = array_merge($config['exclude'] ?? ['d|.git', 'd|.idea', 'd|.buildpath', 'd|.project', 'd|.settings'], ['f|fs_checksum']);
-        $this->include  = array_merge($config['include'] ?? ['f|*.php', 'f|*.html', 'f|.env', 'f|.htaccess', 'f|*.sh', 'f|*.bat'], ['d|*']);
+        $excludeDefault = ['d|.git', 'd|.idea', 'd|.buildpath', 'd|.project', 'd|.settings'];
+        $includeDefault = ['f|*.php', 'f|*.html', 'f|.env', 'f|.htaccess', 'f|*.sh', 'f|*.bat'];
+
+        $excludeList = $config['exclude'] ?? (isset($config['excludeMerge']) ? array_merge($config['excludeMerge'], $excludeDefault) : []);
+        $includeList = $config['include'] ?? (isset($config['includeMerge']) ? array_merge($config['includeMerge'], $includeDefault) : []);
+
+        $this->exclude  = array_merge($excludeList, ['f|fs_checksum']);
+        $this->include  = array_merge($includeList, ['d|*']);
     }
 
     /**
@@ -145,6 +154,8 @@ class FileSystemSecurity
                 $status = false;
             }
         }
+
+        if ($status) $diff = [];
 
         $call = $this->callback;
         return $call ? $call($status, $diff) : compact('status', 'diff');
