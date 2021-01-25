@@ -14,17 +14,16 @@ composer require nomelodic/file-system-security
 
 Объявляем класс и передаем массив с настройками.
 ```
-<?php
-    $security = new FilesSecurity([
-        'baseDir' => __DIR__,
-        'include' => ['f|*.php'],
-        'includeMerge' => ['d|*.js'],
-        'exclude' => ['f|sitemap.xml'],
-        'excludeMerge' => ['d|vendor'],
-        'callback' => function ($status, $diff) {
-            /* Здесь выполняем необходимые действия */
-        }
-    ]);
+$security = new FilesSecurity([
+    'baseDir' => __DIR__,
+    'include' => ['f|*.php'],
+    'includeMerge' => ['d|*.js'],
+    'exclude' => ['f|sitemap.xml'],
+    'excludeMerge' => ['d|vendor'],
+    'callback' => function ($status, $diff) {
+        /* Здесь выполняем необходимые действия */
+    }
+]);
 ```
 ## Конфигурация
 
@@ -121,13 +120,13 @@ function ($status, $diff) {
 **scan** *void* - Производит сканирование системы и сохраняет слепок. Вызов:
 
 ```
-$sec->scan();
+$security->scan();
 ```
 По итогу обхода создает файл `fs_checksum`, в котором сохраняет состояние системы.
 
 **check** *void|callable* - Проверяет систему на наличие изменений. Вызов:
 ```
-$sec->check();
+$security->check();
 ```
 Если в настройках была передана функция **callback**, то выполнит её, иначе вернет ассоциативный массив с теми же параметрами, которые передаются в функцию:
 ```
