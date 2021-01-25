@@ -1,6 +1,6 @@
 # File System Security
 
-[![Packagist Version](https://img.shields.io/packagist/v/nomelodic/fss)](https://packagist.org/packages/nomelodic/fss)
+[![Packagist Version](https://img.shields.io/packagist/v/nomelodic/file-system-security)](https://packagist.org/packages/nomelodic/file-system-security)
 
 Многие сайты подвергаются взлому, и очень часто владельцы сайтов узнают об этом не сразу. Безусловно, для избежания подобного необходимо обеспечить безопасность сайта должным образом, убирать все дыры, проверять входящие данные и т.д. Но далеко не всегда разработчику удаётся это сделать, т.к. в проектах очень часто используются пакеты, плагины, расширения и пр. подобные вещи сторонних разработчиков. Уязвимости могут быть в любом месте.
 
@@ -9,7 +9,7 @@
 ## Установка
 
 ```
-composer require nomelodic/fss
+composer require nomelodic/file-system-security
 ```
 
 ## Использование
