@@ -3,6 +3,8 @@ namespace nomelodic\fss;
 
 use Exception;
 use FilesystemIterator;
+use nomelodic\fss\assets\Filter;
+use nomelodic\fss\assets\Secure;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use SplFileInfo;
@@ -110,6 +112,7 @@ class FileSystemSecurity
         ];
 
         $status = true;
+        $secure = new Secure();
 
         // Если записанная контрольная не совпадает с текущей
         if ($checksum['checksum'] !== md5($json))
@@ -129,7 +132,8 @@ class FileSystemSecurity
                         // Записываем как модифицированный
                         $diff['modified'][$file] = [
                             'old' => $old[$file],
-                            'new' => $info
+                            'new' => $info,
+                            'warnings' => $secure->scan($this->baseDir . $file)
                         ];
 
                         $status = false;
@@ -142,7 +146,8 @@ class FileSystemSecurity
                 {
                     // Иначе записываем как созданный
                     $diff['created'][$file] = [
-                        'new' => $info
+                        'new' => $info,
+                        'warnings' => $secure->scan($this->baseDir . $file)
                     ];
 
                     $status = false;

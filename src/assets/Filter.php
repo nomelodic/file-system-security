@@ -1,5 +1,5 @@
 <?php
-namespace nomelodic\fss;
+namespace nomelodic\fss\assets;
 
 use RecursiveFilterIterator;
 
@@ -49,7 +49,7 @@ class Filter extends RecursiveFilterIterator {
     }
 
     /**
-     * @param string[] $list
+     * @param  string[] $list
      * @return Filter
      */
     public function parseExclude(array $list)
@@ -58,7 +58,7 @@ class Filter extends RecursiveFilterIterator {
     }
 
     /**
-     * @param string[] $list
+     * @param  string[] $list
      * @return Filter
      */
     private function setExclude(array $list)
@@ -69,7 +69,7 @@ class Filter extends RecursiveFilterIterator {
     }
 
     /**
-     * @param string[] $list
+     * @param  string[] $list
      * @return Filter
      */
     public function parseInclude(array $list)
@@ -78,7 +78,7 @@ class Filter extends RecursiveFilterIterator {
     }
 
     /**
-     * @param string[] $list
+     * @param  string[] $list
      * @return Filter
      */
     private function setInclude(array $list)
