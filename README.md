@@ -152,19 +152,19 @@ $security->check();
 
 ```
 private $warnings = [
-    'exec'               => 5,
-    'chmod'              => 5,
-    'mkdir'              => 4,
-    'file_put_contents'  => 4,
-    'fwrite'             => 4,
-    '$GLOBAL'            => 3,
-    'base64_decode'      => 3,
-    'getenv'             => 3,
-    'set_time_limit'     => 2,
-    'rmdir'              => 2,
-    'mail'               => 2,
-    'curl_init'          => 1,
-    'header'             => 1
+    'exec',
+    'chmod',
+    'mkdir',
+    'file_put_contents',
+    'fwrite',
+    '$GLOBAL',
+    'base64_decode',
+    'getenv',
+    'set_time_limit',
+    'rmdir',
+    'mail',
+    'curl_init',
+    'header',
 ];
 ```
 
