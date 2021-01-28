@@ -3,7 +3,7 @@
     "description": "The library creates a snapshot of the project file system and calculates the checksum.",
     "type": "library",
     "license": "MIT",
-    "version": "0.2",
+    "version": "0.3",
     "authors": [
         {
             "name": "Слава Гапонов",
